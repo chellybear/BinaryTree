@@ -118,8 +118,8 @@ namespace main_savitch_10
         // CONSTRUCTOR
         binary_tree_node(
                          const Item& init_data = Item( ),
-                         binary_tree_node* init_left = NULL,
-                         binary_tree_node* init_right = NULL
+                         binary_tree_node* init_left = nullptr,
+                         binary_tree_node* init_right = nullptr
                          )
         {
             data_field = init_data;

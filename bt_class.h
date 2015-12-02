@@ -121,7 +121,7 @@ namespace main_savitch_10
         // the "current" node, plus a member variable to keep track of
         // the number of nodes in this tree.
         binary_tree_node<Item> *root_ptr;
-        binary_tree_node<Item> *current_ptr;
+        binary_tree_node<Item> *current_ptr = nullptr;
         int count;
     };
 
@@ -130,16 +130,16 @@ namespace main_savitch_10
 // ---------------------------
     
     template <class Item>
-    void create_first_node(const Item& entry)
+    void binary_tree<Item>::create_first_node(const Item& entry)
     {
-        binary_tree_node<Item> *root_ptr = &entry;
-        binary_tree_node<Item> *current_ptr = *root_ptr;
+        *root_ptr = entry;
+        *current_ptr = *root_ptr;
     }
     
     template <class Item>
-    void change(const Item& new_entry)
+    void binary_tree<Item>::change(const Item& new_entry)
     {
-        binary_tree_node<Item> *current_ptr->set_data(new_entry);
+        *current_ptr->set_data(new_entry);
     }
 
     
