@@ -121,7 +121,7 @@ namespace main_savitch_10
         // the "current" node, plus a member variable to keep track of
         // the number of nodes in this tree.
         binary_tree_node<Item> *root_ptr;
-        binary_tree_node<Item> *current_ptr = nullptr;
+        binary_tree_node<Item> *current_ptr;
         int count;
     };
 
