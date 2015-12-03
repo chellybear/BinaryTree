@@ -151,8 +151,22 @@ namespace main_savitch_10
     template <class Item>
     void binary_tree<Item>::create_first_node(const Item& entry)
     {
-        root_ptr = new binary_tree_node<Item>(entry);
-        current_ptr = root_ptr;
+        if (count == 0)
+        {
+            root_ptr = new binary_tree_node<Item>(entry);
+            current_ptr = root_ptr;
+        } else {
+            std::cout << "Can't create first node for tree that has a first node already." << std::endl;
+        }
+    }
+    
+    template <class Item>
+    void binary_tree<Item>::shift_to_root( )
+    {
+        if (count > 0)
+        {
+            
+        }
     }
     
     template <class Item>
