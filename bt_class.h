@@ -112,6 +112,8 @@ namespace main_savitch_10
         // CONSTANT MEMBER FUNCTIONS
         std::size_t size( ) const;
         Item retrieve( ) const;
+        const binary_tree_node<Item>* return_root() const;
+        const binary_tree_node<Item>* return_current() const;
         bool has_parent( ) const;
         bool has_left_child( ) const;
         bool has_right_child( ) const;    
@@ -122,7 +124,7 @@ namespace main_savitch_10
         // the number of nodes in this tree.
         binary_tree_node<Item> *root_ptr;
         binary_tree_node<Item> *current_ptr;
-        int count;
+        size_t count;
     };
 
 // ---------------------------
@@ -130,16 +132,44 @@ namespace main_savitch_10
 // ---------------------------
     
     template <class Item>
+    binary_tree<Item>::binary_tree( )
+    {
+        root_ptr = nullptr;
+        current_ptr = nullptr;
+        count = 0;
+    }
+    
+    template <class Item>
+    binary_tree<Item>::binary_tree(const binary_tree& source)
+    {
+        count = source.size(); // magic
+        root_ptr = tree_copy(source->return_root);
+        current_ptr = source->return_current();
+    }
+    
+    
+    template <class Item>
     void binary_tree<Item>::create_first_node(const Item& entry)
     {
-        *root_ptr = entry;
-        *current_ptr = *root_ptr;
+        root_ptr = new binary_tree_node<Item>(entry);
+        current_ptr = root_ptr;
     }
     
     template <class Item>
     void binary_tree<Item>::change(const Item& new_entry)
     {
-        *current_ptr->set_data(new_entry);
+        current_ptr->set_data(new_entry);
+    }
+    
+    template <class Item>
+    const binary_tree_node<Item>* binary_tree<Item>::return_root() const
+    {
+        return root_ptr;
+    }
+    
+    template <class Item>
+    const binary_tree_node<Item>* binary_tree<Item>::return_current() const{
+        return current_ptr;
     }
 
     
