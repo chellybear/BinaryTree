@@ -112,7 +112,7 @@ namespace main_savitch_10
         void locate_parent_node(Item* target); //done
         // CONSTANT MEMBER FUNCTIONS
         std::size_t size( ) const; //done
-        Item retrieve( ) const; //done
+        Item retrieve( ) const; //returns type binary_tree_node
         const Item* return_root() const; //done
         const Item* return_current() const; //done
         bool has_parent( ) const;   //done
@@ -270,8 +270,8 @@ namespace main_savitch_10
         if (!has_left_child())
         {
             current_ptr->set_left(new Item(entry));
+            count++;
         }
-        count++;
     }
     
     template <class Item>
@@ -281,8 +281,8 @@ namespace main_savitch_10
         if (!has_right_child())
         {
             current_ptr->set_right(new Item(entry));
+            count++;
         }
-        count++;
     }
     
     template <class Item>
