@@ -45,7 +45,19 @@ int main() {
     cout << first->data() << endl;
     //"third"
     
-    //cout << test->retrieve(); should work but it doesn't
+    //cout << test->retrieve(); should produce
+    //"third"
+    //but it returns type binary_tree_node<string>
+    
+    test->shift_right();
+    *first = test->retrieve();
+    cout << first->data() << endl;
+    //"second"
+    
+    test->shift_up();
+    *first = test->retrieve();
+    cout << first->data() << endl;
+    //"first"
 
     return 0;
 }
