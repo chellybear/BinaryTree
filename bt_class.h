@@ -195,14 +195,14 @@ namespace main_savitch_10
     template <class Item>
     void binary_tree<Item>::shift_left( )
     {
-        //check for has_left_child();
+        assert(has_left_child());
         current_ptr = current_ptr->left();
     }
     
     template <class Item>
     void binary_tree<Item>::shift_right()
     {
-        //check for has_right_child();
+        assert(has_right_child());
         current_ptr = current_ptr->right();
     }
     
