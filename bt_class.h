@@ -109,12 +109,12 @@ namespace main_savitch_10
         void change(const Item& new_entry); //done
         void add_left(const Item& entry); //done
         void add_right(const Item& entry); //done
-        void locate_parent_node(binary_tree_node<Item>* target); //done
+        void locate_parent_node(Item* target); //done
         // CONSTANT MEMBER FUNCTIONS
         std::size_t size( ) const; //done
         Item retrieve( ) const; //done
-        const binary_tree_node<Item>* return_root() const; //done
-        const binary_tree_node<Item>* return_current() const; //done
+        const Item* return_root() const; //done
+        const Item* return_current() const; //done
         bool has_parent( ) const;   //done
         bool has_left_child( ) const; //done
         bool has_right_child( ) const; //done
@@ -123,8 +123,8 @@ namespace main_savitch_10
         // My own implementation has a root pointer and a pointer to
         // the "current" node, plus a member variable to keep track of
         // the number of nodes in this tree.
-        binary_tree_node<Item> *root_ptr;
-        binary_tree_node<Item> *current_ptr;
+        Item *root_ptr;
+        Item *current_ptr;
         size_t count;
     };
 
@@ -154,7 +154,7 @@ namespace main_savitch_10
     {
         if (count == 0)
         {
-            root_ptr = new binary_tree_node<Item>(entry);
+            root_ptr = new Item(entry);
             current_ptr = root_ptr;
             count++;
         } else {
@@ -180,13 +180,13 @@ namespace main_savitch_10
     }
     
     template <class Item>
-    const binary_tree_node<Item>* binary_tree<Item>::return_root() const
+    const Item* binary_tree<Item>::return_root() const
     {
         return root_ptr;
     }
     
     template <class Item>
-    const binary_tree_node<Item>* binary_tree<Item>::return_current() const{
+    const Item* binary_tree<Item>::return_current() const{
         return current_ptr;
     }
 
@@ -242,16 +242,16 @@ namespace main_savitch_10
     void binary_tree<Item>::shift_up( )
     {
         assert(has_parent());
-        binary_tree_node<Item>* copy_of_root = root_ptr;
-        current_ptr = locate_parent_node(copy_of_root);
+        Item* copy_of_root = root_ptr;
+        locate_parent_node(copy_of_root);
     }
     
     template <class Item>
-    void binary_tree<Item>::locate_parent_node(binary_tree_node<Item>* target)
+    void binary_tree<Item>::locate_parent_node(Item* target)
     {
         if (target->left() == current_ptr || target->right() == current_ptr)
         {
-            return target;
+            current_ptr = target;
         }
         
         if (current_ptr != target)
@@ -268,7 +268,7 @@ namespace main_savitch_10
         assert(size() >0);
         if (!has_left_child())
         {
-            current_ptr->set_left(new binary_tree_node<Item>(entry));
+            current_ptr->set_left(new Item(entry));
         }
         count++;
     }
@@ -279,7 +279,7 @@ namespace main_savitch_10
         assert(size() >0);
         if (!has_right_child())
         {
-            current_ptr->set_right(new binary_tree_node<Item>(entry));
+            current_ptr->set_right(new Item(entry));
         }
         count++;
     }
