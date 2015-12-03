@@ -97,26 +97,27 @@ namespace main_savitch_10
     {
     public:
         // CONSTRUCTORS and DESTRUCTOR
-        binary_tree( );
-        binary_tree(const binary_tree& source);
-        ~binary_tree( );
+        binary_tree( ); //done
+        binary_tree(const binary_tree& source); //done
+        ~binary_tree( ); //done
         // MODIFICATION MEMBER FUNCTIONS
-        void create_first_node(const Item& entry);
-        void shift_to_root( );
-        void shift_up( );
-        void shift_left( );
-        void shift_right( );
-        void change(const Item& new_entry);
-        void add_left(const Item& entry);
-        void add_right(const Item& entry);
+        void create_first_node(const Item& entry); //done
+        void shift_to_root( ); //done
+        void shift_up( ); //done
+        void shift_left( ); //done
+        void shift_right( ); //done
+        void change(const Item& new_entry); //done
+        void add_left(const Item& entry); //done
+        void add_right(const Item& entry); //done
+        void locate_parent_node(binary_tree_node<Item>* target); //done
         // CONSTANT MEMBER FUNCTIONS
-        std::size_t size( ) const;
-        Item retrieve( ) const;
-        const binary_tree_node<Item>* return_root() const;
-        const binary_tree_node<Item>* return_current() const;
-        bool has_parent( ) const;
-        bool has_left_child( ) const;
-        bool has_right_child( ) const;    
+        std::size_t size( ) const; //done
+        Item retrieve( ) const; //done
+        const binary_tree_node<Item>* return_root() const; //done
+        const binary_tree_node<Item>* return_current() const; //done
+        bool has_parent( ) const;   //done
+        bool has_left_child( ) const; //done
+        bool has_right_child( ) const; //done
     private:
         // Private member variables to be specified by the student.
         // My own implementation has a root pointer and a pointer to
@@ -142,7 +143,7 @@ namespace main_savitch_10
     template <class Item>
     binary_tree<Item>::binary_tree(const binary_tree& source)
     {
-        count = source.size(); // magic
+        count = source->size(); // magic
         root_ptr = tree_copy(source->return_root);
         current_ptr = source->return_current();
     }
@@ -155,6 +156,7 @@ namespace main_savitch_10
         {
             root_ptr = new binary_tree_node<Item>(entry);
             current_ptr = root_ptr;
+            count++;
         } else {
             std::cout << "Can't create first node for tree that has a first node already." << std::endl;
         }
@@ -165,7 +167,9 @@ namespace main_savitch_10
     {
         if (count > 0)
         {
-            
+            current_ptr = root_ptr;
+        } else {
+            std::cout << "No nodes currently in the binary tree." << std::endl;
         }
     }
     
@@ -186,8 +190,121 @@ namespace main_savitch_10
         return current_ptr;
     }
 
+    template <class Item>
+    void binary_tree<Item>::shift_left( )
+    {
+        //check for has_left_child();
+        current_ptr = current_ptr->left();
+    }
     
+    template <class Item>
+    void binary_tree<Item>::shift_right()
+    {
+        //check for has_right_child();
+        current_ptr = current_ptr->right();
+    }
     
-
+    template <class Item>
+    bool binary_tree<Item>::has_parent( ) const
+    {
+        if (current_ptr != root_ptr && current_ptr != NULL){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    template <class Item>
+    bool binary_tree<Item>::has_left_child( ) const
+    {
+        assert(size() > 0);
+        if (current_ptr->left() != NULL)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    template <class Item>
+    bool binary_tree<Item>::has_right_child( ) const
+    {
+        assert(size() > 0);
+        if (current_ptr->right() != NULL)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    template <class Item>
+    void binary_tree<Item>::shift_up( )
+    {
+        assert(has_parent());
+        binary_tree_node<Item>* copy_of_root = root_ptr;
+        current_ptr = locate_parent_node(copy_of_root);
+    }
+    
+    template <class Item>
+    void binary_tree<Item>::locate_parent_node(binary_tree_node<Item>* target)
+    {
+        if (target->left() == current_ptr || target->right() == current_ptr)
+        {
+            return target;
+        }
+        
+        if (current_ptr != target)
+        {
+            locate_parent_node(target->left());
+            locate_parent_node(target->right());
+        }
+        
+    }
+    
+    template <class Item>
+    void binary_tree<Item>::add_left(const Item& entry)
+    {
+        assert(size() >0);
+        if (!has_left_child())
+        {
+            current_ptr->set_left(new binary_tree_node<Item>(entry));
+        }
+        count++;
+    }
+    
+    template <class Item>
+    void binary_tree<Item>::add_right(const Item& entry)
+    {
+        assert(size() >0);
+        if (!has_right_child())
+        {
+            current_ptr->set_right(new binary_tree_node<Item>(entry));
+        }
+        count++;
+    }
+    
+    template <class Item>
+    std::size_t binary_tree<Item>::size( ) const
+    {
+        return count;
+    }
+    
+    template <class Item>
+    Item binary_tree<Item>::retrieve( ) const
+    {
+        return current_ptr->data();
+    }
+    
+    template <class Item>
+    binary_tree<Item>::~binary_tree( )
+    {
+        tree_clear(root_ptr);
+        delete root_ptr;
+        root_ptr = nullptr;
+        delete current_ptr;
+        current_ptr = nullptr;
+        count = NULL;
+    }
 }
 #endif 
