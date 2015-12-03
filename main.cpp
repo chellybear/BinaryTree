@@ -14,9 +14,11 @@ int main() {
     
     binary_tree<binary_tree_node<string>> *test = new binary_tree<binary_tree_node<string>>;
     
+    //create nodes that we will add to the binary_tree test
     binary_tree_node<string> *first = new binary_tree_node<string> ("first");
     binary_tree_node<string> *second = new binary_tree_node<string> ("second");
     binary_tree_node<string> *third = new binary_tree_node<string> ("third");
+    binary_tree_node<string> *fourth = new binary_tree_node<string> ("fourth"); //unused
     
     test->create_first_node(*first);
     test->add_right(*second);
@@ -31,33 +33,50 @@ int main() {
     cout << test->size() << endl;
     //3
     
-    *first = test->retrieve();
-    cout << first->data() << endl;
+    cout << test->retrieve() << endl;
     //"first"
     
     test->shift_left();
-    *first = test->retrieve();
-    cout << first->data() << endl;
-    //"second"
+    cout << test->retrieve() << endl;
+    //"third"
     
     test->shift_up();
-    *first = test->retrieve();
-    cout << first->data() << endl;
-    //"third"
-    
-    //cout << test->retrieve(); should produce
-    //"third"
-    //but it returns type binary_tree_node<string>
+    cout << test->retrieve() << endl;
+    //"first"
     
     test->shift_right();
-    *first = test->retrieve();
-    cout << first->data() << endl;
+    cout << test->retrieve() << endl;
     //"second"
     
     test->shift_up();
-    *first = test->retrieve();
-    cout << first->data() << endl;
+    cout << test->retrieve() << endl;
     //"first"
+    
+    test->shift_left();
+    cout << test->retrieve() << endl;
+    //"third"
+    
+    //            "first"
+    //             /   \
+    //    --> "third" "second"
+    
+    test->add_left(*fourth);
+    
+    //            "first"
+    //             /   \
+    //    --> "third" "second"
+    //          /
+    //      "fourth"
+    
+    test->shift_left();
+    cout << test->retrieve() << endl;
+    //"fourth"
+    
+    //            "first"
+    //             /   \
+    //        "third" "second"
+    //          /
+    //  --> "fourth"
 
     return 0;
 }

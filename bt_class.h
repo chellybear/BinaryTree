@@ -88,6 +88,7 @@
 #define BT_CLASS_H
 #include <cstdlib>    // Provides size_t
 #include <cassert>    // Provides assert
+#include <string>
 #include "bintree.h"  // Provides binary_tree_node<Item> template class
 
 namespace main_savitch_10
@@ -96,6 +97,7 @@ namespace main_savitch_10
     class binary_tree
     {
     public:
+        typedef std::string value_type;
         // CONSTRUCTORS and DESTRUCTOR
         binary_tree( ); //done
         binary_tree(const binary_tree& source); //done
@@ -112,7 +114,7 @@ namespace main_savitch_10
         void locate_parent_node(Item* target); //done
         // CONSTANT MEMBER FUNCTIONS
         std::size_t size( ) const; //done
-        Item retrieve( ) const; //returns type binary_tree_node
+        value_type retrieve( ) const; //returns type binary_tree_node
         const Item* return_root() const; //done
         const Item* return_current() const; //done
         bool has_parent( ) const;   //done
@@ -292,7 +294,7 @@ namespace main_savitch_10
     }
     
     template <class Item>
-    Item binary_tree<Item>::retrieve( ) const
+    typename binary_tree<Item>::value_type binary_tree<Item>::retrieve( ) const
     {
         return current_ptr->data();
     }
