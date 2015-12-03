@@ -18,7 +18,7 @@ int main() {
     binary_tree_node<string> *first = new binary_tree_node<string> ("first");
     binary_tree_node<string> *second = new binary_tree_node<string> ("second");
     binary_tree_node<string> *third = new binary_tree_node<string> ("third");
-    binary_tree_node<string> *fourth = new binary_tree_node<string> ("fourth"); //unused
+    binary_tree_node<string> *fourth = new binary_tree_node<string> ("fourth");
     
     test->create_first_node(*first);
     test->add_right(*second);

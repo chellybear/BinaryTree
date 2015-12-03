@@ -114,7 +114,7 @@ namespace main_savitch_10
         void locate_parent_node(Item* target); //done
         // CONSTANT MEMBER FUNCTIONS
         std::size_t size( ) const; //done
-        value_type retrieve( ) const; //returns type binary_tree_node
+        value_type retrieve( ) const; //done
         const Item* return_root() const; //done
         const Item* return_current() const; //done
         bool has_parent( ) const;   //done
