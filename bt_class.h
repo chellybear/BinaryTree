@@ -252,6 +252,7 @@ namespace main_savitch_10
         if (target->left() == current_ptr || target->right() == current_ptr)
         {
             current_ptr = target;
+            return;
         }
         
         if (current_ptr != target)

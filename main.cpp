@@ -45,6 +45,7 @@ int main() {
     cout << first->data() << endl;
     //"third"
     
+    //cout << test->retrieve(); should work but it doesn't
 
     return 0;
 }
