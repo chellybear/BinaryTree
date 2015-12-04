@@ -220,7 +220,7 @@ namespace main_savitch_10
     bool binary_tree<Item>::has_left_child( ) const
     {
         assert(size() > 0);
-        if (current_ptr->left() != NULL)
+        if (current_ptr->left() != nullptr)
         {
             return true;
         } else {
@@ -232,7 +232,7 @@ namespace main_savitch_10
     bool binary_tree<Item>::has_right_child( ) const
     {
         assert(size() > 0);
-        if (current_ptr->right() != NULL)
+        if (current_ptr->right() != nullptr)
         {
             return true;
         } else {
@@ -303,10 +303,10 @@ namespace main_savitch_10
     binary_tree<Item>::~binary_tree( )
     {
         tree_clear(root_ptr);
-        delete root_ptr;
         root_ptr = nullptr;
-        delete current_ptr;
+        delete root_ptr;
         current_ptr = nullptr;
+        delete current_ptr;
         count = NULL;
     }
 }
